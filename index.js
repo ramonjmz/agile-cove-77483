@@ -17,6 +17,6 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/token', function(req, res){
-	res.send(req.body.token) })
+	res.send(req.body.token); })
   .get('/switch', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
