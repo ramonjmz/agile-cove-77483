@@ -14,10 +14,6 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .get('/cool', (req, res) => res.send(cool()))
   .get('/token-devices', (req, res) => res.send(req.body.token))
-  .get('/switch/:ping?', (req, res) => res.json({
-            data: req.params.ping}))
-  console.log(req.params)
+  .get('/switch', (req, res) => res.json({
+            data: req.params}))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-
-  
