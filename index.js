@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/token-device', function(req, res){
+app.post('/token-devices', function(req, res){
 	res.send(req.body.token);
 });
 
