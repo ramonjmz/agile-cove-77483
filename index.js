@@ -18,8 +18,8 @@ express()
             data: req.params.ping}))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-  console.dir(req.hostname);
-  console.dir(req.ip);
-  console.dir(req.params.name);
+  console.log(req.hostname);
+  console.log(req.ip);
+  console.log(req.params.name);
 
   
