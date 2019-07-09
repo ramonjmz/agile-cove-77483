@@ -3,8 +3,8 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 
 var bodyParse = require("body-parser");
-app.use(bodyParse.json());
-app.use(bodyParse.urlencoded({extended: true }));
+	.use(bodyParser.json());
+	.use(bodyParser.urlencoded({ extended: true }));
 
 
 express()
@@ -15,7 +15,7 @@ express()
   .get('/switch', (req, res) => res.render('pages/index'))
 
 
-  app.post('/token-device', function(req, res){
+   .post('/token-device', function(req, res){
   	res.send(req.body.token);
   });
 
