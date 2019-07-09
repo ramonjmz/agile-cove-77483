@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true }));
 
 app.post('/token-devices', function(req, res){
 	res.send(req.body.token);
-}):
+});
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
