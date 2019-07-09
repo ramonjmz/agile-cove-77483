@@ -16,10 +16,10 @@ express()
   .get('/token-devices', (req, res) => res.send(req.body.token))
   .get('/switch/:ping?', (req, res) => res.json({
             data: req.params.ping}))
+  console.log(req.hostname)
+  console.log(req.ip)
+  console.log(req.params.name)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-  console.log(req.hostname);
-  console.log(req.ip);
-  console.log(req.params.name);
 
   
