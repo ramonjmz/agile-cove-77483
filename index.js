@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
-var bodyParse = require("body-parser");
+var bodyParser = require("body-parser");
 	.use(bodyParser.json());
 	.use(bodyParser.urlencoded({ extended: true }));
 
