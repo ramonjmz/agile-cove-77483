@@ -7,6 +7,9 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true }));
 
+app.get('/token-devices', (req, res){
+	res.send(req.body.token);
+}):
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
