@@ -15,10 +15,8 @@ express()
   .get('/switch', (req, res) => res.render('pages/index'))
 
 
-  .post('/token-device', function(req, res){
-
+  app.post('/token-device', function(req, res){
   	res.send(req.body.token);
-
   });
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
