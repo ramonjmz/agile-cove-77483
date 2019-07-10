@@ -37,7 +37,7 @@ express()
   .get('/foco', async (req, res) => {
     try {
       const client2 = await pool.connect()
-      const result = await client2.query('SELECT * FROM device where name = $1', ['foco001']);
+      const result = await client2.query('SELECT * FROM device where name = $1', ['foco000']);
       const results = { 'results': (result) ? result.rows : null};
       // res.render('pages/db', results );
       res.send(results);
