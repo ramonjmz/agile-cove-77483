@@ -45,20 +45,6 @@ express()
         res.send("Error " + err);
       }
     })
-  .get('/device', async (req, res) => {
-    try {
-      const client = await pool.connect()
-      const result = await client.query('SELECT status FROM device where name = $1', [req.body.device]);
-      const results = { 'results': (result) ? result.rows : null};
-      // res.render('pages/db', results );
-      res.send(results);
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.send("Error " + err);
-    }
-  })
-
   .put('/foco/:device', async (req, res) => {
     try {
       const client = await pool.connect()
@@ -72,5 +58,17 @@ express()
       res.send("Error " + err);
     }
   })
-
+  .get('/device/:device', async (req, res) => {
+    try {
+      const client = await pool.connect()
+      const result = await client.query('SELECT status FROM device where name = $1', [req.params.device]);
+      const results = { 'results': (result) ? result : null};
+      // res.render('pages/db', results );
+      res.send(results);
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
