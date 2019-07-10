@@ -65,7 +65,7 @@ express()
       //const results = { 'results': (result) ? result.rows[0].status : null};
       const estado = (result.rows[0].status) ? 1 : 0;
       // res.render('pages/db', results );
-      console.log(results);
+      console.log(estado);
       res.format ({
        'text/plain': function() {
           res.send(estado);
