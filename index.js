@@ -63,8 +63,9 @@ express()
       const client = await pool.connect()
       const result = await client.query('SELECT status FROM device where name = $1', [req.params.device]);
       const results = { 'results': (result) ? result.rows[0].status : null};
-      const estado = { 'estado': (results == true) ? 1 : 0};
+      const estado = { 'estado': (results) ? 1 : 0};
       // res.render('pages/db', results );
+      console.log(results);
       res.send(estado);
       client.release();
     } catch (err) {
