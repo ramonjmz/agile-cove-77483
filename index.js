@@ -32,7 +32,7 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/foco', , async (req, res) => {
+  .get('/foco', async (req, res) => {
       try {
         const client2 = await pool.connect()
         const result = await client2.query('SELECT * FROM device where name = $1', [req.params.device]);
