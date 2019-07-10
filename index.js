@@ -22,7 +22,7 @@ express()
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result = await client.query("SELECT * FROM device where name ='foco001'");
+      const result = await client.query('SELECT * FROM test_table');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
@@ -36,9 +36,9 @@ express()
             data: req.params.foco}))
   .get('/foco', (req, res) => {
 
-    try {
+      try {
       const client = await pool.connect()
-      const result = await client.query("SELECT * FROM device where name ='foco001'");
+      const result = await client.query('SELECT * FROM device where name = $1::text', ['foco001']);
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
