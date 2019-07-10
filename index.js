@@ -19,6 +19,7 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/cool', (req, res) => res.send(cool()))
+  .get('/token-devices', (req, res) => res.send(req.params.token))
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
@@ -31,14 +32,24 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/token-devices', (req, res) => res.send(req.params.token))
-  .get('/switch', (req, res) => res.json({
-            data: req.params.foco}))
+  .get('/foco', , async (req, res) => {
+      try {
+        const client2 = await pool.connect()
+        const result = await client2.query('SELECT * FROM device where name = $1', [req.body.device]);
+        const results = { 'results': (result) ? result.rows : null};
+        // res.render('pages/db', results );
+        res.send(results);
+        client2.release();
+      } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+      }
+    })
   .get('/device', async (req, res) => {
     try {
       const client2 = await pool.connect()
-      const result = await client2.query('SELECT * FROM device where name = $1', [req.body.device]);
-      const results = { 'results': (result) ? result.rows.status : null};
+      const result = await client2.query('SELECT status FROM device where name = $1', [req.body.device]);
+      const results = { 'results': (result) ? result.rows : null};
       // res.render('pages/db', results );
       res.send(results);
       client2.release();
@@ -48,6 +59,6 @@ express()
     }
   })
 
-  .put('/foco', (req, res) => res.send(1))
+  .put('/device', (req, res) => res.send(1))
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
