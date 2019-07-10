@@ -34,10 +34,10 @@ express()
   .get('/token-devices', (req, res) => res.send(req.params.token))
   .get('/switch', (req, res) => res.json({
             data: req.params.foco}))
-  .get('/foco', async (req, res) => {
+  .get('/device', async (req, res) => {
     try {
       const client2 = await pool.connect()
-      const result = await client2.query('SELECT * FROM device where name = $1', ['foco000']);
+      const result = await client2.query('SELECT * FROM device where name = $1', [req.params.device]);
       const results = { 'results': (result) ? result.rows : null};
       // res.render('pages/db', results );
       res.send(results);
