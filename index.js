@@ -36,11 +36,11 @@ express()
             data: req.params.foco}))
   .get('/foco', (req, res) => {
     try {
-      const client = await pool.connect()
-      const result = await client.query('SELECT * FROM device');
+      const client2 = await pool.connect()
+      const result = await client2.query('SELECT * FROM device');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
-      client.release();
+      client2.release();
     } catch (err) {
       console.error(err);
       res.send("Error " + err);
