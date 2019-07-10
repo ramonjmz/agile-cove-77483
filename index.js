@@ -34,7 +34,7 @@ express()
   .get('/token-devices', (req, res) => res.send(req.params.token))
   .get('/switch', (req, res) => res.json({
             data: req.params.foco}))
-  .get('/foco', (req, res) => {
+  .get('/foco', async (req, res) => {
     try {
       const client2 = await pool.connect()
       const result = await client2.query('SELECT * FROM device');
