@@ -35,8 +35,7 @@ express()
   .get('/switch', (req, res) => res.json({
             data: req.params.foco}))
   .get('/foco', (req, res) => {
-
-      try {
+    try {
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM device');
       const results = { 'results': (result) ? result.rows : null};
@@ -46,7 +45,6 @@ express()
       console.error(err);
       res.send("Error " + err);
     }
-
   })
 
   .put('/foco', (req, res) => res.send(1))
