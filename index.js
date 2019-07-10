@@ -66,7 +66,9 @@ express()
       const estado = (result.rows[0].status) ? 1 : 0;
       // res.render('pages/db', results );
       console.log(estado);
-      res.send(estado);
+     
+      res.status(200).send(estado);
+
 
       client.release();
     } catch (err) {
