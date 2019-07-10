@@ -59,6 +59,18 @@ express()
     }
   })
 
-  .put('/device', (req, res) => res.send(1))
+  .put('/device/:device', async (req, res) => {
+    try {
+      const client2 = await pool.connect()
+      const result = await client2.query('update device set status = true where name =$1 ;', [req.body.device]);
+      const results = { 'results': (result) ? result.rows : null};
+      // res.render('pages/db', results );
+      res.send(results);
+      client2.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
