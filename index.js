@@ -49,7 +49,7 @@ express()
     try {
       const client = await pool.connect()
       const result = await client.query('update device set status = $2 where name =$1 ;', [req.params.device,req.body.status]);
-      const results = { 'results': (result) ? result.rows : null};
+      const results = { 'results': (result) ? result : null};
       // res.render('pages/db', results );
       res.send(results);
       client.release();
