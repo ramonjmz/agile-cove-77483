@@ -34,12 +34,12 @@ express()
   })
   .get('/foco/:device', async (req, res) => {
       try {
-        const client2 = await pool.connect()
-        const result = await client2.query('SELECT * FROM device where name = $1', [req.params.device]);
+        const client = await pool.connect()
+        const result = await client.query('SELECT * FROM device where name = $1', [req.params.device]);
         const results = { 'results': (result) ? result.rows : null};
         // res.render('pages/db', results );
         res.send(results);
-        client2.release();
+        client.release();
       } catch (err) {
         console.error(err);
         res.send("Error " + err);
@@ -47,26 +47,26 @@ express()
     })
   .get('/device', async (req, res) => {
     try {
-      const client2 = await pool.connect()
-      const result = await client2.query('SELECT status FROM device where name = $1', [req.body.device]);
+      const client = await pool.connect()
+      const result = await client.query('SELECT status FROM device where name = $1', [req.body.device]);
       const results = { 'results': (result) ? result.rows : null};
       // res.render('pages/db', results );
       res.send(results);
-      client2.release();
+      client.release();
     } catch (err) {
       console.error(err);
       res.send("Error " + err);
     }
   })
 
-  .put('/device/:device', async (req, res) => {
+  .put('/foco/:device', async (req, res) => {
     try {
-      const client2 = await pool.connect()
-      const result = await client2.query('update device set status = true where name =$1 ;', [req.body.device]);
+      const client = await pool.connect()
+      const result = await client.query('update device set status = $2 where name =$1 ;', [req.params.device,req.body.status]);
       const results = { 'results': (result) ? result.rows : null};
       // res.render('pages/db', results );
       res.send(results);
-      client2.release();
+      client.release();
     } catch (err) {
       console.error(err);
       res.send("Error " + err);
