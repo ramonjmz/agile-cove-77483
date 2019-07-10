@@ -75,10 +75,10 @@ express()
       res.send("Error " + err);
     }
   })
-  .put('/device/:device', async (req, res) => {
+  .put('/device/:device/:status', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result = await client.query('update device set status = $2 where name =$1 ;', [req.params.device,req.body.status]);
+      const result = await client.query('update device set status = $2 where name =$1 ;', [req.params.device,req.params.status]);
       const results = { 'results': (result) ? result.rowCount : null};
       // res.render('pages/db', results );
       res.send(results);
