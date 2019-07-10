@@ -67,8 +67,7 @@ express()
       // res.render('pages/db', results );
       console.log(estado);
      
-      res.status(200).send(estado);
-
+      res.sendStatus(200).send(estado);
 
       client.release();
     } catch (err) {
