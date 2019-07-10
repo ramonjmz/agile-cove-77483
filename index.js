@@ -38,7 +38,7 @@ express()
     try {
       const client2 = await pool.connect()
       const result = await client2.query('SELECT * FROM device where name = $1', [req.body.device]);
-      const results = { 'results': (result) ? result.rows : null};
+      const results = { 'results': (result) ? result.rows.status : null};
       // res.render('pages/db', results );
       res.send(results);
       client2.release();
