@@ -66,10 +66,9 @@ express()
       const results = { 'estado': (result.rows[0].status) ? 1 : 0};
       // res.render('pages/db', results );
       console.log(results);
-      //res.send(estado);
       res.format ({
        'text/plain': function() {
-          res.send(result.estado);
+          res.send(results.estado);
         }
       });
       client.release();
